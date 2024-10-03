@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\luisb\\OneDrive\\Documents\\pruebaDevelop\\pruebaDevelop.csproj": {}
+    "C:\\Users\\Practicas\\Documents\\GitHub\\developTest\\pruebaDevelop\\pruebaDevelop.csproj": {}
   },
   "projects": {
-    "C:\\Users\\luisb\\OneDrive\\Documents\\pruebaDevelop\\pruebaDevelop.csproj": {
+    "C:\\Users\\Practicas\\Documents\\GitHub\\developTest\\pruebaDevelop\\pruebaDevelop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\luisb\\OneDrive\\Documents\\pruebaDevelop\\pruebaDevelop.csproj",
+        "projectUniqueName": "C:\\Users\\Practicas\\Documents\\GitHub\\developTest\\pruebaDevelop\\pruebaDevelop.csproj",
         "projectName": "pruebaDevelop",
-        "projectPath": "C:\\Users\\luisb\\OneDrive\\Documents\\pruebaDevelop\\pruebaDevelop.csproj",
-        "packagesPath": "C:\\Users\\luisb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\luisb\\OneDrive\\Documents\\pruebaDevelop\\obj\\",
+        "projectPath": "C:\\Users\\Practicas\\Documents\\GitHub\\developTest\\pruebaDevelop\\pruebaDevelop.csproj",
+        "packagesPath": "C:\\Users\\Practicas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Practicas\\Documents\\GitHub\\developTest\\pruebaDevelop\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\luisb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Practicas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -49,6 +44,10 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[112.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -65,24 +64,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.27, 6.0.27]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -91,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
