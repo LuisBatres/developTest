@@ -12,10 +12,13 @@ namespace pruebaDevelop.Models
         [JsonProperty("email")]
         public string? Email { get; set; }
 
-        [JsonProperty("phone")]
-        public string? Phone { get; set; }
+        [JsonProperty("phoneHome")]
+        public string? PhoneHome { get; set; }
 
-        [JsonProperty("address")]
+        [JsonProperty("phoneMobile")]
+        public string? PhoneMobile { get; set; }
+
+        [JsonProperty("addresses")]
         public List<Address>? Addresses { get; set; }
 
         [JsonProperty("birthday")]
