@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using pruebaDevelop.Models;
 using RestSharp;
+using System.Collections.Generic;
 
 namespace pruebaDevelop.Controllers
 {
@@ -50,14 +51,12 @@ namespace pruebaDevelop.Controllers
             return customerResponse;
         }
 
-
+        // --------------------------------------------------------------------------------------------------
         // Servicio que retorne la dirección preferida del cliente.
         // (En base a la propiedad “preferred” de la lista “address”).
-
-        // Servicio para buscar direcciones del cliente por código postal.
         [HttpGet]
-        [Route("SearchAddressByPostalCode")]
-        public async Task<Address> SearchAddress([FromQuery] string postalCode)
+        [Route("PreferredAddress")]
+        public async Task<Address> PreferredAddress([FromHeader] string customerID)
         {
             RestClient restClient = new RestClient();
             RestRequest restRequest = new RestRequest()
@@ -69,28 +68,62 @@ namespace pruebaDevelop.Controllers
             restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
 
             RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
-            //text
 
-            if (restResponse.Content == null)
-                return new Address();
-
-            //se deserializa la respuesta  
+            if (restResponse.Content == null) return new Address();
+ 
             string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
 
             JToken token = JToken.Parse(desResponse);
             JObject json = JObject.Parse((string)token);
 
-            if (json == null)
-                return new Address();
+            Customer? customerResponse = JsonConvert.DeserializeObject<Customer>(json.ToString());
 
-            string? address = json["addresses"].Where(a => a[postalCode] == a["postalCode"]).Select(a => a["address1"].ToString()).FirstOrDefault();
+            var customer = customerResponse.CustomerId.ToString();
 
-            Address? addressResponse = JsonConvert.DeserializeObject<Address>(address.ToString());
+            var address = (from customer_ in customerResponse.ToString()
+                            where customer == customerID
+                            from addr in customerResponse.Addresses
+                            where (bool)addr.Preferred == true
+                            select addr).FirstOrDefault();
 
-            if (addressResponse == null)
-                return new Address();
+            return address;
 
-            return addressResponse;
+        }
+
+        // --------------------------------------------------------------------------------------------------
+        // Servicio para buscar todas direcciones del cliente por código postal.
+        [HttpGet]
+        [Route("SearchAddressByPostalCode")]
+        public async Task<List<Address>>SearchAddress([FromQuery] string postalCode)
+        { 
+            RestClient restClient = new RestClient();
+            RestRequest restRequest = new RestRequest()
+            {
+                Resource = "https://examentecnico.azurewebsites.net/v3/api/Test/Customer",
+                Method = Method.Get,
+            };
+
+            restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
+
+            RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
+
+            if (restResponse.Content == null) return new List<Address>();
+ 
+            string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
+
+            Customer? customer = JsonConvert.DeserializeObject<Customer>(desResponse);
+            if (customer != null) return new List<Address>();
+
+            List<Address> addressList = customer.Addresses.ToList();
+            if (addressList.Count == 0) return new List<Address>();
+
+            var adressAux = (from address in addressList
+                             where (string)address.PostalCode == postalCode
+                             select address).ToList();
+
+            if (!adressAux.Any()) return new List<Address>();
+
+            return adressAux;
         }
     }
 }

@@ -50,7 +50,7 @@ namespace pruebaDevelop.Models
         public string? PostBox { get; set; }
 
         [JsonProperty("preferred")]
-        public string? Preferred { get; set; }
+        public bool? Preferred { get; set; }
 
         [JsonProperty("salutation")]
         public string? Salutation { get; set; }
