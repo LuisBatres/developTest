@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using pruebaDevelop.APIs;
 using pruebaDevelop.Models;
+using pruebaDevelop.Utils;
 using RestSharp;
 
 namespace pruebaDevelop.Controllers
@@ -16,36 +16,17 @@ namespace pruebaDevelop.Controllers
         [Route("CustomerInformation")]
         public async Task<Customer> GetCustomerInfo()
         {
-            RestClient restClient = new RestClient();
-            RestRequest restRequest = new RestRequest()
-            {
-                Resource = "https://examentecnico.azurewebsites.net/v3/api/Test/Customer",
-                Method = Method.Get,
-            };
 
-            restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
+            CustomerAPI customerAPI = new CustomerAPI();
+            //Consumimos el servicio
+            RestResponse restResponse = await customerAPI.CustomerConsumme();
 
-            RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
-            //text
+            if (restResponse.Content == null) return new Customer();
 
-            if (restResponse.Content == null)
-                return new Customer();
+            // Obtenemos el modelo cliente
+            Customer? customerResponse = CustomerUtils.FormatJsonAndObtainCustomer(restResponse);
 
-            //se deserializa la respuesta  
-            string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
-
-            JToken token = JToken.Parse(desResponse);
-            JObject json = JObject.Parse((string)token);
-
-            if (json == null)
-                return new Customer();
-
-            //tenemos el JSON y convertimos en objeto de utilidad
-            Customer? customerResponse = JsonConvert.DeserializeObject<Customer>(json.ToString());
-            //ya tenemos respuesta
-
-            if (customerResponse == null)
-                return new Customer();
+            if (customerResponse == null) return new Customer();
 
             return customerResponse;
         }
@@ -58,84 +39,43 @@ namespace pruebaDevelop.Controllers
         [Route("SortAddresses")]
         public async Task<List<Address>> SortAddress(string property, string order)
         {
-            RestClient restClient = new RestClient();
-            RestRequest restRequest = new RestRequest()
-            {
-                Resource = "https://examentecnico.azurewebsites.net/v3/api/Test/Customer",
-                Method = Method.Get,
-            };
-
-            restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
-
-            RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
+            RestResponse restResponse = await new CustomerAPI().CustomerConsumme();
 
             if (restResponse.Content == null) return new List<Address>();
 
-            string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
+            Customer? customerResponse = CustomerUtils.FormatJsonAndObtainCustomer(restResponse);
 
-            JToken token = JToken.Parse(desResponse);
-            JObject json = JObject.Parse((string)token);
+            if (customerResponse == null) return new List<Address>();
 
-            Customer? customerResponse = JsonConvert.DeserializeObject<Customer>(json.ToString());
+            List<Address> sortedList = CustomerUtils.OrderCustomerAddressList(property, order, customerResponse);
 
-            string orderLower = order.ToLower();
-
-            List<Address> sortedList = customerResponse.Addresses;
-
-            if(property == "address1" && orderLower == "desc")
-            {
-                sortedList = sortedList.OrderByDescending(a => a.Address1).ToList();
-            }
-            else if (property == "address1" && orderLower == "asc")
-            {
-                sortedList = sortedList.OrderBy(a => a.Address1).ToList();
-            }
-            else if (property == "creationDate" && orderLower == "desc")
-            {
-                sortedList = sortedList.OrderByDescending(a => a.CreationDate).ToList();
-            }
-            else if (property == "creationDate" && orderLower == "asc")
-                sortedList = sortedList.OrderBy(a => a.CreationDate).ToList();
+            if (sortedList.Count == 0) return new List<Address>();
 
             return sortedList;
-
         }
-
 
         // --------------------------------------------------------------------------------------------------
         // Servicio que retorne la dirección preferida del cliente.
         // (En base a la propiedad “preferred” de la lista “address”).
         [HttpGet]
         [Route("PreferredAddress")]
-        public async Task<Address> PreferredAddress([FromHeader] string customerID)
+        public async Task<Address> PreferredAddress([FromHeader] string customerId)
         {
-            RestClient restClient = new RestClient();
-            RestRequest restRequest = new RestRequest()
-            {
-                Resource = "https://examentecnico.azurewebsites.net/v3/api/Test/Customer",
-                Method = Method.Get,
-            };
-
-            restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
-
-            RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
+            RestResponse restResponse = await new CustomerAPI().CustomerConsumme();
 
             if (restResponse.Content == null) return new Address();
- 
-            string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
 
-            JToken token = JToken.Parse(desResponse);
-            JObject json = JObject.Parse((string)token);
+            Customer? customerResponse = CustomerUtils.FormatJsonAndObtainCustomer(restResponse);
 
-            Customer? customerResponse = JsonConvert.DeserializeObject<Customer>(json.ToString());
+            var id = customerResponse.CustomerId.ToString();
 
-            var customer = customerResponse.CustomerId.ToString();
+            var address = (from customer in customerResponse.ToString()
+                           where id == customerId
+                           from addr in customerResponse.Addresses
+                           where (bool)addr.Preferred == true
+                           select addr).FirstOrDefault();
 
-            var address = (from customer_ in customerResponse.ToString()
-                            where customer == customerID
-                            from addr in customerResponse.Addresses
-                            where (bool)addr.Preferred == true
-                            select addr).FirstOrDefault();
+            if(address == null) return new Address();
 
             return address;
 
@@ -145,33 +85,20 @@ namespace pruebaDevelop.Controllers
         // Servicio para buscar todas direcciones del cliente por código postal.
         [HttpGet]
         [Route("SearchAddressByPostalCode")]
-        public async Task<List<Address>>SearchAddress([FromQuery] string postalCode)
-        { 
-            RestClient restClient = new RestClient();
-            RestRequest restRequest = new RestRequest()
-            {
-                Resource = "https://examentecnico.azurewebsites.net/v3/api/Test/Customer",
-                Method = Method.Get,
-            };
-
-            restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
-
-            RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
+        public async Task<List<Address>> SearchAddress([FromQuery] string postalCode)
+        {
+            RestResponse restResponse = await new CustomerAPI().CustomerConsumme();
 
             if (restResponse.Content == null) return new List<Address>();
- 
-            string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
 
-            JToken token = JToken.Parse(desResponse);
-            JObject json = JObject.Parse((string)token);
+            Customer? customer = CustomerUtils.FormatJsonAndObtainCustomer(restResponse);
 
-            Customer? customer = JsonConvert.DeserializeObject<Customer>(json.ToString());
-
+            // Busca todas las direcciones con el mismo codigo postal y las guarda en una lista
             List<Address> direcciones = customer.Addresses.FindAll(d => d.PostalCode == postalCode);
-            
-            if(direcciones.Count == 0) return new List<Address>();
 
+            if (direcciones.Count == 0) return new List<Address>();
 
+            // Devolvemos una lista con todas las direcciones que tienen un mismo codigo postal
             return direcciones;
         }
     }
