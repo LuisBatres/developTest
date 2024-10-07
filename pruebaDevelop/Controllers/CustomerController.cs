@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using pruebaDevelop.Models;
 using RestSharp;
-using System.Collections.Generic;
 
 namespace pruebaDevelop.Controllers
 {
@@ -50,6 +49,14 @@ namespace pruebaDevelop.Controllers
 
             return customerResponse;
         }
+
+        // --------------------------------------------------------------------------------------------------
+        // Servicio que ordene las direcciones (en base a la propiedad Address1)
+        // y por fecha de creación (CreationDate),
+        // haciendo posible que el usuario pueda seleccionar con qué propiedad ordenar y en qué orden.
+        [HttpGet]
+        [Route("SortAddresses")]
+
 
         // --------------------------------------------------------------------------------------------------
         // Servicio que retorne la dirección preferida del cliente.
@@ -111,19 +118,17 @@ namespace pruebaDevelop.Controllers
  
             string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
 
-            Customer? customer = JsonConvert.DeserializeObject<Customer>(desResponse);
-            if (customer != null) return new List<Address>();
+            JToken token = JToken.Parse(desResponse);
+            JObject json = JObject.Parse((string)token);
 
-            List<Address> addressList = customer.Addresses.ToList();
-            if (addressList.Count == 0) return new List<Address>();
+            Customer? customer = JsonConvert.DeserializeObject<Customer>(json.ToString());
 
-            var adressAux = (from address in addressList
-                             where (string)address.PostalCode == postalCode
-                             select address).ToList();
+            List<Address> direcciones = customer.Addresses.FindAll(d => d.PostalCode == postalCode);
+            
+            if(direcciones.Count == 0) return new List<Address>();
 
-            if (!adressAux.Any()) return new List<Address>();
 
-            return adressAux;
+            return direcciones;
         }
     }
 }
