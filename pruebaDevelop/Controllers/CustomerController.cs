@@ -56,6 +56,50 @@ namespace pruebaDevelop.Controllers
         // haciendo posible que el usuario pueda seleccionar con qué propiedad ordenar y en qué orden.
         [HttpGet]
         [Route("SortAddresses")]
+        public async Task<List<Address>> SortAddress(string property, string order)
+        {
+            RestClient restClient = new RestClient();
+            RestRequest restRequest = new RestRequest()
+            {
+                Resource = "https://examentecnico.azurewebsites.net/v3/api/Test/Customer",
+                Method = Method.Get,
+            };
+
+            restRequest.AddHeader("Authorization", "Basic Y2hyaXN0b3BoZXJAZGV2ZWxvcC5teDpUZXN0aW5nRGV2ZWxvcDEyM0AuLi4=");
+
+            RestResponse restResponse = await restClient.ExecuteAsync(restRequest);
+
+            if (restResponse.Content == null) return new List<Address>();
+
+            string? desResponse = JsonConvert.DeserializeObject(restResponse.Content).ToString();
+
+            JToken token = JToken.Parse(desResponse);
+            JObject json = JObject.Parse((string)token);
+
+            Customer? customerResponse = JsonConvert.DeserializeObject<Customer>(json.ToString());
+
+            string orderLower = order.ToLower();
+
+            List<Address> sortedList = customerResponse.Addresses;
+
+            if(property == "address1" && orderLower == "desc")
+            {
+                sortedList = sortedList.OrderByDescending(a => a.Address1).ToList();
+            }
+            else if (property == "address1" && orderLower == "asc")
+            {
+                sortedList = sortedList.OrderBy(a => a.Address1).ToList();
+            }
+            else if (property == "creationDate" && orderLower == "desc")
+            {
+                sortedList = sortedList.OrderByDescending(a => a.CreationDate).ToList();
+            }
+            else if (property == "creationDate" && orderLower == "asc")
+                sortedList = sortedList.OrderBy(a => a.CreationDate).ToList();
+
+            return sortedList;
+
+        }
 
 
         // --------------------------------------------------------------------------------------------------
