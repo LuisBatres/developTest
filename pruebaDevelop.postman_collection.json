@@ -1,0 +1,322 @@
+{
+	"info": {
+		"_postman_id": "cbb94633-638f-4d9f-834c-f080b7654642",
+		"name": "pruebaDevelop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38752642"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "CustomerInformation",
+							"item": [
+								{
+									"name": "/api/Customer/CustomerInformation",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Customer/CustomerInformation",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Customer",
+												"CustomerInformation"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Customer/CustomerInformation",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Customer",
+														"CustomerInformation"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"customerId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phoneHome\": \"<string>\",\n  \"phoneMobile\": \"<string>\",\n  \"addresses\": [\n    {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"addressId\": \"<string>\",\n      \"city\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"creationDate\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"jobTitle\": \"<string>\",\n      \"lastModified\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"postBox\": \"<string>\",\n      \"preferred\": \"<boolean>\",\n      \"salutation\": \"<string>\",\n      \"secondName\": \"<string>\",\n      \"stateCode\": \"<string>\",\n      \"suite\": \"<string>\",\n      \"title\": \"<string>\",\n      \"c_esFiscal\": \"<string>\",\n      \"c_razonSocial\": \"<string>\",\n      \"c_rfc\": \"<string>\",\n      \"c_usoCFDI\": \"<string>\",\n      \"c_colonia\": \"<string>\",\n      \"c_streetNumber\": \"<string>\",\n      \"c_buildingNumber\": \"<string>\",\n      \"c_latitude\": \"<string>\",\n      \"c_longitude\": \"<string>\",\n      \"c_reference\": \"<string>\",\n      \"errorMessage\": \"<string>\"\n    },\n    {\n      \"address1\": \"<string>\",\n      \"address2\": \"<string>\",\n      \"addressId\": \"<string>\",\n      \"city\": \"<string>\",\n      \"companyName\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"creationDate\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"jobTitle\": \"<string>\",\n      \"lastModified\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"postBox\": \"<string>\",\n      \"preferred\": \"<boolean>\",\n      \"salutation\": \"<string>\",\n      \"secondName\": \"<string>\",\n      \"stateCode\": \"<string>\",\n      \"suite\": \"<string>\",\n      \"title\": \"<string>\",\n      \"c_esFiscal\": \"<string>\",\n      \"c_razonSocial\": \"<string>\",\n      \"c_rfc\": \"<string>\",\n      \"c_usoCFDI\": \"<string>\",\n      \"c_colonia\": \"<string>\",\n      \"c_streetNumber\": \"<string>\",\n      \"c_buildingNumber\": \"<string>\",\n      \"c_latitude\": \"<string>\",\n      \"c_longitude\": \"<string>\",\n      \"c_reference\": \"<string>\",\n      \"errorMessage\": \"<string>\"\n    }\n  ],\n  \"birthday\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "SortAddresses",
+							"item": [
+								{
+									"name": "/api/Customer/SortAddresses",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Customer/SortAddresses?property=<string>&order=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Customer",
+												"SortAddresses"
+											],
+											"query": [
+												{
+													"key": "property",
+													"value": "<string>"
+												},
+												{
+													"key": "order",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Customer/SortAddresses?property=<string>&order=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Customer",
+														"SortAddresses"
+													],
+													"query": [
+														{
+															"key": "property",
+															"value": "<string>"
+														},
+														{
+															"key": "order",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"addressId\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"creationDate\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"jobTitle\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"postBox\": \"<string>\",\n    \"preferred\": \"<boolean>\",\n    \"salutation\": \"<string>\",\n    \"secondName\": \"<string>\",\n    \"stateCode\": \"<string>\",\n    \"suite\": \"<string>\",\n    \"title\": \"<string>\",\n    \"c_esFiscal\": \"<string>\",\n    \"c_razonSocial\": \"<string>\",\n    \"c_rfc\": \"<string>\",\n    \"c_usoCFDI\": \"<string>\",\n    \"c_colonia\": \"<string>\",\n    \"c_streetNumber\": \"<string>\",\n    \"c_buildingNumber\": \"<string>\",\n    \"c_latitude\": \"<string>\",\n    \"c_longitude\": \"<string>\",\n    \"c_reference\": \"<string>\",\n    \"errorMessage\": \"<string>\"\n  },\n  {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"addressId\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"creationDate\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"jobTitle\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"postBox\": \"<string>\",\n    \"preferred\": \"<boolean>\",\n    \"salutation\": \"<string>\",\n    \"secondName\": \"<string>\",\n    \"stateCode\": \"<string>\",\n    \"suite\": \"<string>\",\n    \"title\": \"<string>\",\n    \"c_esFiscal\": \"<string>\",\n    \"c_razonSocial\": \"<string>\",\n    \"c_rfc\": \"<string>\",\n    \"c_usoCFDI\": \"<string>\",\n    \"c_colonia\": \"<string>\",\n    \"c_streetNumber\": \"<string>\",\n    \"c_buildingNumber\": \"<string>\",\n    \"c_latitude\": \"<string>\",\n    \"c_longitude\": \"<string>\",\n    \"c_reference\": \"<string>\",\n    \"errorMessage\": \"<string>\"\n  }\n]"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "PreferredAddress",
+							"item": [
+								{
+									"name": "/api/Customer/PreferredAddress",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "customerID",
+												"value": "<string>"
+											},
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Customer/PreferredAddress",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Customer",
+												"PreferredAddress"
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "customerID",
+														"value": "<string>"
+													},
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Customer/PreferredAddress",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Customer",
+														"PreferredAddress"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"address1\": \"<string>\",\n  \"address2\": \"<string>\",\n  \"addressId\": \"<string>\",\n  \"city\": \"<string>\",\n  \"companyName\": \"<string>\",\n  \"countryCode\": \"<string>\",\n  \"creationDate\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"fullName\": \"<string>\",\n  \"jobTitle\": \"<string>\",\n  \"lastModified\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"postalCode\": \"<string>\",\n  \"postBox\": \"<string>\",\n  \"preferred\": \"<boolean>\",\n  \"salutation\": \"<string>\",\n  \"secondName\": \"<string>\",\n  \"stateCode\": \"<string>\",\n  \"suite\": \"<string>\",\n  \"title\": \"<string>\",\n  \"c_esFiscal\": \"<string>\",\n  \"c_razonSocial\": \"<string>\",\n  \"c_rfc\": \"<string>\",\n  \"c_usoCFDI\": \"<string>\",\n  \"c_colonia\": \"<string>\",\n  \"c_streetNumber\": \"<string>\",\n  \"c_buildingNumber\": \"<string>\",\n  \"c_latitude\": \"<string>\",\n  \"c_longitude\": \"<string>\",\n  \"c_reference\": \"<string>\",\n  \"errorMessage\": \"<string>\"\n}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "SearchAddressByPostalCode",
+							"item": [
+								{
+									"name": "/api/Customer/SearchAddressByPostalCode",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "text/plain"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/Customer/SearchAddressByPostalCode?postalCode=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"Customer",
+												"SearchAddressByPostalCode"
+											],
+											"query": [
+												{
+													"key": "postalCode",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"response": [
+										{
+											"name": "Success",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "text/plain"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/Customer/SearchAddressByPostalCode?postalCode=<string>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"Customer",
+														"SearchAddressByPostalCode"
+													],
+													"query": [
+														{
+															"key": "postalCode",
+															"value": "<string>"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"addressId\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"creationDate\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"jobTitle\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"postBox\": \"<string>\",\n    \"preferred\": \"<boolean>\",\n    \"salutation\": \"<string>\",\n    \"secondName\": \"<string>\",\n    \"stateCode\": \"<string>\",\n    \"suite\": \"<string>\",\n    \"title\": \"<string>\",\n    \"c_esFiscal\": \"<string>\",\n    \"c_razonSocial\": \"<string>\",\n    \"c_rfc\": \"<string>\",\n    \"c_usoCFDI\": \"<string>\",\n    \"c_colonia\": \"<string>\",\n    \"c_streetNumber\": \"<string>\",\n    \"c_buildingNumber\": \"<string>\",\n    \"c_latitude\": \"<string>\",\n    \"c_longitude\": \"<string>\",\n    \"c_reference\": \"<string>\",\n    \"errorMessage\": \"<string>\"\n  },\n  {\n    \"address1\": \"<string>\",\n    \"address2\": \"<string>\",\n    \"addressId\": \"<string>\",\n    \"city\": \"<string>\",\n    \"companyName\": \"<string>\",\n    \"countryCode\": \"<string>\",\n    \"creationDate\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"jobTitle\": \"<string>\",\n    \"lastModified\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"postBox\": \"<string>\",\n    \"preferred\": \"<boolean>\",\n    \"salutation\": \"<string>\",\n    \"secondName\": \"<string>\",\n    \"stateCode\": \"<string>\",\n    \"suite\": \"<string>\",\n    \"title\": \"<string>\",\n    \"c_esFiscal\": \"<string>\",\n    \"c_razonSocial\": \"<string>\",\n    \"c_rfc\": \"<string>\",\n    \"c_usoCFDI\": \"<string>\",\n    \"c_colonia\": \"<string>\",\n    \"c_streetNumber\": \"<string>\",\n    \"c_buildingNumber\": \"<string>\",\n    \"c_latitude\": \"<string>\",\n    \"c_longitude\": \"<string>\",\n    \"c_reference\": \"<string>\",\n    \"errorMessage\": \"<string>\"\n  }\n]"
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "/"
+		}
+	]
+}
